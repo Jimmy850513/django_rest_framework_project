@@ -1,4 +1,4 @@
-# API Documentation (Django)
+# API Documentation (Django_Rest_Framework twitter API)
 
 使用者註冊
 
