@@ -1,0 +1,4 @@
+# Django stuff:
+setting.py
+# Django migrations
+*/migrations/*
