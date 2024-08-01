@@ -895,4 +895,258 @@ Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoi
 }
 ```
 
-查看當前使用者所喜歡的貼文 api/user_follow_post/
+## 查看當前使用者喜歡所有的貼文 GET api/user_follow_post/
+
+- parameters :  NO
+- Request_head :
+
+```sql
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxODc3MjI5LCJpYXQiOjE3MjE4NzU0MjksImp0aSI6IjUxYzg5MDVlZTFlYjRhNzc5NzczZjg1Yjk3Y2ZlMWVmIiwidXNlcl9pZCI6M30.lAuO6MV7NGwLg60BBkks-mT3ufzdRmWMPE0FBqQTLQg
+```
+
+- Request Body : NO
+- Response 200
+
+```powershell
+{
+    "msg": "adam所喜歡的文章",
+    "data": [
+        {
+            "id": 2,
+            "post_id": 2,
+            "user_id": 4,
+            "user_name": "adam",
+            "like_post": true,
+            "like_post_start_date": "2024-08-01",
+            "cancel_start_date": "2024-08-01"
+        },
+        {
+            "id": 3,
+            "post_id": 1,
+            "user_id": 4,
+            "user_name": "adam",
+            "like_post": true,
+            "like_post_start_date": "2024-08-01",
+            "cancel_start_date": "2024-08-01"
+        },
+        {
+            "id": 4,
+            "post_id": 3,
+            "user_id": 4,
+            "user_name": "adam",
+            "like_post": true,
+            "like_post_start_date": "2024-08-01",
+            "cancel_start_date": "2024-08-01"
+        },
+        {
+            "id": 5,
+            "post_id": 4,
+            "user_id": 4,
+            "user_name": "adam",
+            "like_post": true,
+            "like_post_start_date": "2024-08-01",
+            "cancel_start_date": "2024-08-01"
+        }
+    ],
+    "status": 200
+}
+```
+
+如果當前無喜歡的貼文的話：
+
+```powershell
+{
+"msg":"目前無喜歡的文章",
+"status":200
+}
+```
+
+- Response 403
+
+```powershell
+{
+"msg":"權限不足請先登入",
+"status":403
+}
+```
+
+- Response 500
+
+```powershell
+{
+"msg":"伺服器發生錯誤",
+"status":500
+}
+```
+
+## 新增當前使用者喜歡的貼文 POST api/user_follow_post/
+
+- parameters :  NO
+- Request_head :
+
+```sql
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxODc3MjI5LCJpYXQiOjE3MjE4NzU0MjksImp0aSI6IjUxYzg5MDVlZTFlYjRhNzc5NzczZjg1Yjk3Y2ZlMWVmIiwidXNlcl9pZCI6M30.lAuO6MV7NGwLg60BBkks-mT3ufzdRmWMPE0FBqQTLQg
+```
+
+- Request Body :
+
+```powershell
+{"post_id":post_id}
+```
+
+- Response 200
+
+```powershell
+{
+"msg":"Adam喜歡文章1成功",
+"status":200
+}
+```
+
+- Response 400
+
+```powershell
+{
+"msg":"請輸入你要追蹤的文章編號！",
+"status":400
+}
+```
+
+- Response 404
+
+```powershell
+{
+"msg":"找不到該篇文章,文章主人可能已經刪除了",
+"status":404
+}
+```
+
+- Response 500
+
+```powershell
+{
+"msg":"伺服器發生錯誤",
+"status":500
+}
+```
+
+- Response 403
+
+```powershell
+{
+"msg":"權限不足請先登入",
+"status":403
+}
+```
+
+查看當前使用者特定的喜歡貼文 GET api/user_liked_post_spec/<int:post_id>/
+
+- parameters :  post_id
+- Request_head :
+
+```sql
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxODc3MjI5LCJpYXQiOjE3MjE4NzU0MjksImp0aSI6IjUxYzg5MDVlZTFlYjRhNzc5NzczZjg1Yjk3Y2ZlMWVmIiwidXNlcl9pZCI6M30.lAuO6MV7NGwLg60BBkks-mT3ufzdRmWMPE0FBqQTLQg
+```
+
+- Request Body : NO
+- Response 200
+
+```powershell
+{
+    "msg": "找到該文章成功",
+    "data": {
+        "post_id": 3,
+        "user_name": "judy",
+        "user": 2,
+        "post_title": "我是judy使用者,目前測試API",
+        "post_content": "API測試可以正常建立貼文,後續進行喜歡貼文的追蹤"
+    },
+    "status": 200
+}
+```
+
+- Response 400
+
+```powershell
+{
+    "msg": "該文章文自己的文章",
+    "status": 400
+}
+```
+
+```powershell
+{
+    "msg": "尚未喜歡該文章,要先去喜歡才可以查看",
+    "status": 400
+}
+```
+
+- Response 404
+
+```powershell
+{
+    "msg": "找不到該文章,可能已經被刪除了",
+    "status": 404
+}
+```
+
+- Response 403
+
+```powershell
+{
+"msg":"權限不足請先登入",
+"status":403
+}
+```
+
+## 取消當前使用者的文章追蹤 PATCH api/user_liked_post_spec/<int:post_id>/
+
+- parameters :  post_id
+- Request_head :
+
+```sql
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxODc3MjI5LCJpYXQiOjE3MjE4NzU0MjksImp0aSI6IjUxYzg5MDVlZTFlYjRhNzc5NzczZjg1Yjk3Y2ZlMWVmIiwidXNlcl9pZCI6M30.lAuO6MV7NGwLg60BBkks-mT3ufzdRmWMPE0FBqQTLQg
+```
+
+- Request Body : NO
+- Response 200
+
+```powershell
+{
+"msg":"取消追蹤成功",
+"status":200
+}
+```
+
+- Response 400
+
+```powershell
+{
+"msg":"該文章文自己的文章,不可以取消追蹤",
+"status":400
+}
+```
+
+```powershell
+{
+"msg":"尚未喜歡該文章,無法執行取消追蹤",
+"status":400
+}
+```
+
+- Response 404
+
+```powershell
+{
+"msg":"找不到該文章,可能已經被刪除了",
+"status":404
+}
+```
+
+- Response 403
+```powershell
+{
+"msg":"權限不足請先登入",
+"status":403
+}
+```
