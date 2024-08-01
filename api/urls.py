@@ -24,11 +24,11 @@ urlpatterns = [
   #對指定貼文進行留言的話,需要jwt token才可以留言,對留言可以進行刪改查的動作
   path('api/post_views_comment/<int:comment_id>/',Post_Views_Comment.as_view(),name='post_views_comment'),
   #追隨指定的使用者#查看追隨使用者的貼文,可以取消追隨#查看該使用者的個人資料
-  path("api/user_follow/<int:user_id>",User_Follow.as_view(),name='user_follow'),
+  path("api/user_follow/<int:user_id>/",User_Follow.as_view(),name='user_follow'),
   #查看當前使用者的所有追蹤文章清單
   path("api/user_liked_post/",User_Liked_Post.as_view(),name='user_liked_post'),
   #取消追蹤當前使用者的特定喜歡的文章追隨,新增當前使用者的特定喜歡的文章清單
-  path("api/user_liked_post_spec/",User_Liked_Post_Spec.as_view(),name='user_liked_post_spec'),
+  path("api/user_liked_post_spec/<int:post_id>/",User_Liked_Post_Spec.as_view(),name='user_liked_post_spec'),
   #查看當前使用者的追隨者清單
   path("api/user_follow_all/",User_Follow_All.as_view(),name='user_follow_all')
 ]

@@ -7,6 +7,7 @@ from datetime import datetime
 from rest_framework import status
 from django.forms.models import model_to_dict
 from ..utils import get_user_id_and_username
+from ..models.user_models import User_Follow_Post
 # Create your views here.
 
 #獲取使用者所有的文章

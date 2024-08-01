@@ -100,10 +100,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'restful_api',
-        'USER': 'jimmy',
-        'PASSWORD': 'home1234',
+        'USER': 'dba',
+        'PASSWORD': 'open2002',
         'HOST': 'localhost',  # 设置为空字符串表示本地主机
-        'PORT': '5432',  # 设置为空字符串表示默认端口
+        'PORT': '5439',  # 设置为空字符串表示默认端口
     }
 }
 
